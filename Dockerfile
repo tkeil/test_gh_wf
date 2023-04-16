@@ -8,4 +8,4 @@ RUN \
     apt install -y git gpg makeself jq curl gh; \
     apt clean; \
 
-ENTRYPOINT ["whoami"]
+ENTRYPOINT ["pwd"]
