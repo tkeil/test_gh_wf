@@ -47,7 +47,7 @@ jobs:
 
     -
       name: Run shell command
-      run: pwd; id; hostname; ls -al; echo $DOCKERHUB_USERNAME; echo ${{ secrets.DOCKERHUB_USERNAME }}; echo ${{ inputs.changelog }}
+      run: pwd; id; hostname; ls -al; echo $DOCKERHUB_USERNAME; echo ${{ secrets.DOCKERHUB_USERNAME }}; echo ${{ inputs.changelog }}; echo "${{ github.event.inputs.publish_artifacts } __"
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 
