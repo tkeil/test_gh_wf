@@ -12,6 +12,12 @@ on:
         description: "changelog"
         default: "- ddd"
         type: "string"
+        required: true
+      publish_artifacts:
+        description: 'Publish artifacts'
+        required: true
+        default: 'false'
+
 
 jobs:
 
@@ -46,7 +52,7 @@ jobs:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 
     - name: Configure GPG Key
-      run: ./builder.sh config_gpg
+      run: . ./build_helper.sh; config_gpg
       env:
         GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
 
@@ -58,3 +64,10 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/debian-builder:latest
+
+    - if: github.event.inputs.publish_artifacts == 'true'
+      name: Publish Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
+        path: build/web

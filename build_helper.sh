@@ -3,11 +3,11 @@
 config_gpg(){
   echo "Config GPG ..."
   # Import GPG key
-  if [ "GPG_PRIV_KEY" = "" ]; then
+  if [ "${GPG_PRIV_KEY}" = "" ]; then
     println "ERROR: No GPG_PRIV_KEY defined"
     exit 200
   fi
-  echo "${'$'}{GPG_PRIV_KEY}" > .priv_key.gpg
+  echo "${GPG_PRIV_KEY}" > .priv_key.gpg
   gpg \
     --batch \
     --pinentry-mode loopback \
