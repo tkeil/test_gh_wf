@@ -31,15 +31,20 @@ jobs:
       name: Checkout - Private
       run: |
         the_secret=$((RANDOM))
-        echo "::add-mask::$the_secret"
         echo "{secret-number}={$the_secret}" >> $GITHUB_OUTPUT
         echo "{name}={value}" >> $GITHUB_STATE
+
+#        echo "::add-mask::$the_secret"
+
     - id: checkout-private2
       name: Checkout - Private2
       run: |
+        date
+        date -u
         pwd
         ls -al
         echo "the secret number is ${{ steps.sets-a-secret.outputs.secret-number }}"
+        rm -rf asvsam-installer
         git clone https://github.com/asvsam/asvsam-installer.git
         ls -al
         find .
