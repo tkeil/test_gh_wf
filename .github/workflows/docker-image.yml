@@ -34,7 +34,6 @@ jobs:
         the_secret=$((RANDOM))
         echo "::add-mask::$the_secret"
         echo "::set-output name=secret-number::$the_secret"
-
     -
       id: checkout-private2
       name: Checkout - Private2
