@@ -28,16 +28,30 @@ jobs:
 
     steps:
     -
+      id: checkout-private
       name: Checkout - Private
+      run: |
+        the_secret=$((RANDOM))
+        echo "::add-mask::$the_secret"
+        echo "::set-output name=secret-number::$the_secret"
+
+    -
+      id: checkout-private2
+      name: Checkout - Private2
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
       run: |
-        echo "::group::My title"
-        echo "Inside group"
-        echo "::endgroup::"
-        echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd
-        cat ddd
-        ls -al ddd
+#        echo "::group::My title"
+#        echo "Inside group"
+#        echo "::endgroup::"
+#        echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd
+#        cat ddd
+#        ls -al ddd
         git clone https://github.com/asvsam/asvsam-installer.git
+#        ls -al
+#        find asvsam-installer
+        echo "the secret number is ${{ steps.sets-a-secret.outputs.secret-number }}"
+        mv asvsam-installer/* .
+        rm -rf asvsam-installer
         ls -al
         find asvsam-installer
       env:
