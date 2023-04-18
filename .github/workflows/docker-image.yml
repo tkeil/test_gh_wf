@@ -38,8 +38,8 @@ jobs:
       run: |
         git clone https://github.com/asvsam/asvsam-installer.git
         echo "the secret number is ${{ steps.sets-a-secret.outputs.secret-number }}"
-        mv asvsam-installer/* .
-        rm -rf asvsam-installer
+#        mv asvsam-installer/* .
+#        rm -rf asvsam-installer
         pwd
         ls -al
         find .
