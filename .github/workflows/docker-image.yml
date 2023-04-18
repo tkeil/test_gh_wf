@@ -32,13 +32,15 @@ jobs:
       run: |
         the_secret=$((RANDOM))
         echo "::add-mask::$the_secret"
-        echo "::set-output name=secret-number::$the_secret"
+        echo "{secret-number}={$the_secret}" >> $GITHUB_OUTPUT
+        echo "{name}={value}" >> $GITHUB_STATE
     - id: checkout-private2
       name: Checkout - Private2
       run: |
-        git clone https://github.com/asvsam/asvsam-installer.git
-        echo "the secret number is ${{ steps.sets-a-secret.outputs.secret-number }}"
         pwd
+        ls -al
+        echo "the secret number is ${{ steps.sets-a-secret.outputs.secret-number }}"
+        git clone https://github.com/asvsam/asvsam-installer.git
         ls -al
         find .
       env:
