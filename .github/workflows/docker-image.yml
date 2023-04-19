@@ -109,10 +109,16 @@ jobs:
         echo "VERSION:         ${VERSION}"
         VERSION_FULL=${VERSION}-${NOW_SHORT}-${GIT_REF_SHORT}
         echo "VERSION_FULL:    ${VERSION_FULL}"
-        VERSION_GUI=${VERSION_FULL}$(echo \({{ rel_type }}\) | tr '[:lower:]' '[:upper:]')
+        VERSION_GUI=${VERSION_FULL} $(echo \(${RELEASE_TYPE}\) | tr '[:lower:]' '[:upper:]')
         echo "VERSION_GUI:     ${VERSION_GUI}"
+
+        echo "DOCKER:"
+        echo "=========="
+        DOCKER_CONTAINER_TAGS=${VERSION_BASE},${VERSION_FULL},${RELEASE_TYPE},latest-${RELEASE_TYPE}
+        echo "DOCKER_CONTAINER_TAGS:    ${DOCKER_CONTAINER_TAGS}"
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        RELEASE_TYPE: ${{ input.rel_type }}
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
 
   build:
