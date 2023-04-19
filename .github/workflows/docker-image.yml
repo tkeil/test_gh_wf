@@ -21,7 +21,7 @@ on:
 
 jobs:
 
-  build:
+  checkout-test:
 
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
@@ -52,6 +52,11 @@ jobs:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
 
+  build:
+    needs: checkout-test
+    runs-on: self-hosted
+
+    steps:
     -
       name: Checkout
       uses: actions/checkout@v3
