@@ -118,7 +118,7 @@ jobs:
         echo "DOCKER_CONTAINER_TAGS:    ${DOCKER_CONTAINER_TAGS}"
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        RELEASE_TYPE: ${{ input.rel_type }}
+        RELEASE_TYPE: ${{ github.event.inputs.rel_type }}
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
 
   build:
