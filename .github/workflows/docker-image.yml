@@ -5,6 +5,17 @@ on:
     branches: [ "main" ]
 #   pull_request:
 #     branches: [ "main" ]
+
+    inputs:
+      rel_type:
+        type: choice
+        description: Select type of release
+        required: true
+        default: 'dev'
+        options:
+          - dev
+          - release
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -118,7 +129,7 @@ jobs:
         echo "DOCKER_CONTAINER_TAGS:    ${DOCKER_CONTAINER_TAGS}"
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        RELEASE_TYPE: ${{ github.event.inputs.rel_type }}
+        RELEASE_TYPE: ${{ inputs.rel_type }}
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
 
   build:
