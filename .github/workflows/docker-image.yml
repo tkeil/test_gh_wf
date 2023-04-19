@@ -109,7 +109,7 @@ jobs:
         echo "VERSION:         ${VERSION}"
         VERSION_FULL=${VERSION}-${NOW_SHORT}-${GIT_REF_SHORT}
         echo "VERSION_FULL:    ${VERSION_FULL}"
-        VERSION_GUI=${VERSION_FULL} $(echo \(${RELEASE_TYPE}\) | tr '[:lower:]' '[:upper:]')
+        VERSION_GUI=${VERSION_FULL} $(echo "(${RELEASE_TYPE})" | tr '[:lower:]' '[:upper:]')
         echo "VERSION_GUI:     ${VERSION_GUI}"
 
         echo "DOCKER:"
