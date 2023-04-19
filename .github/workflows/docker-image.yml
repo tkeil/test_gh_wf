@@ -7,6 +7,7 @@ on:
 #     branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
     inputs:
       changelog:
         description: "changelog"
@@ -17,7 +18,24 @@ on:
         description: 'Publish artifacts'
         required: true
         default: 'false'
-
+        type: boolean
+      rel_type:
+        type: choice
+        description: Select type of release
+        required: true
+        default: 'dev'
+        options:
+          - dev
+          - release
+      test_number:
+        type: number
+        description: Select type of release
+        default: 1
+        required: true
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 jobs:
 
@@ -27,6 +45,16 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    - id: env_info
+      name: env_info
+      run: |
+        echo "GITHUB_ACTOR:      {{ GITHUB_ACTOR }}"
+        echo "GITHUB_BASE_REF:   {{ GITHUB_BASE_REF }}"
+        echo "GITHUB_JOB:        {{ GITHUB_JOB }}"
+        echo "GITHUB_RUN_ID:     {{ GITHUB_RUN_ID }}"
+        echo "GITHUB_RUN_NUMBER: {{ GITHUB_RUN_NUMBER }}"
+        echo "RUNNER_NAME:       {{ RUNNER_NAME }}"
+        echo "GITHUB_SHA:        {{ GITHUB_SHA }}"
     - id: checkout-private
       name: Checkout - Private
       run: |
@@ -48,6 +76,8 @@ jobs:
         git clone https://github.com/asvsam/asvsam-installer.git
         ls -al
         find .
+        (cd asvsam; git rev-parse HEAD)
+        pwd
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
