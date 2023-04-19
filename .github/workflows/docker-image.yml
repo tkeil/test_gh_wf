@@ -78,7 +78,7 @@ jobs:
         find .
         (cd asvsam-installer; git rev-parse HEAD)
         (cd asvsam-installer; git rev-parse --short HEAD)
-        NOW_UNIXTIME=(date +%s)
+        NOW_UNIXTIME=$(date +%s)
         echo ${NOW_UNIXTIME}
         env
         (date +"%Y-%m-%d_%H-%M_%S_%N" -d "@${NOW_UNIXTIME}")
