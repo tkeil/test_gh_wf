@@ -25,6 +25,8 @@ jobs:
 
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
+    # Approval Step
+    environment: release
 
     steps:
     - id: checkout-private
