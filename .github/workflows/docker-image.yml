@@ -76,7 +76,14 @@ jobs:
         git clone https://github.com/asvsam/asvsam-installer.git
         ls -al
         find .
-        (cd asvsam; git rev-parse HEAD)
+        (cd asvsam-installer; git rev-parse HEAD)
+        (cd asvsam-installer; git rev-parse --short HEAD)
+        NOW_UNIXTIME=(date +%s)
+        echo ${NOW_UNIXTIME}
+        env
+        (date +"%Y-%m-%d_%H-%M_%S_%N" -d "@${NOW_UNIXTIME}")
+        (date -u +'%Y-%m-%dT%H:%M:%SZ' -d "@${NOW_UNIXTIME}")
+        (date +"%y%m%d-%H%M" -d "@${NOW_UNIXTIME}")
         pwd
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
