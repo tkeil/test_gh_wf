@@ -76,22 +76,26 @@ jobs:
         git clone https://github.com/asvsam/asvsam-installer.git
         ls -al
         find .
+        env
+
         echo "GIT:"
         echo "=========="
         GIT_REF=$(cd asvsam-installer; git rev-parse HEAD)
-        echo ${GIT_REF}
+        echo "GIT_REF:         ${GIT_REF}"
         GIT_REF_SHORT=$(cd asvsam-installer; git rev-parse HEAD | sed 's/\(........\).*/\1/')
-        echo ${GIT_REF_SHORT}
+        echo "GIT_REF_SHORT:   ${GIT_REF_SHORT}"
         # asvsam_20210820/refs/heads/master/36d5c471c6933e2f66b6041e8bfe98027922366b
-        GIT_REF_FULLTEXT=$(echo "${GIT_REF}")
+        GIT_REF_FULLTEXT=$(echo "ddddd ${GIT_REF}")
+        echo "GIT_REF_FULLTEXT: ${GIT_REF_FULLTEXT}"
 
         echo "TIME:"
         echo "=========="
         NOW_UNIXTIME=$(date +%s)
-        echo ${NOW_UNIXTIME}
-        env
-        (date +"%Y-%m-%d_%H-%M_%S_%N" -d "@${NOW_UNIXTIME}")
-        (date -u +'%Y-%m-%dT%H:%M:%SZ' -d "@${NOW_UNIXTIME}")
+        echo "NOW_UNIXTIME:    ${NOW_UNIXTIME}"
+        NOW=$(date +"%Y-%m-%d_%H-%M_%S_%N" -d "@${NOW_UNIXTIME}")
+        echo "NOW:             ${NOW}"
+        NOW_RFC3339=$(date -u +'%Y-%m-%dT%H:%M:%SZ' -d "@${NOW_UNIXTIME}")
+        echo "NOW_RFC3339:     ${NOW_RFC3339}"
         NOW_SHORT=$(date +"%y%m%d-%H%M" -d "@${NOW_UNIXTIME}")
         echo "NOW_SHORT:       ${NOW_SHORT}"
 
@@ -99,7 +103,7 @@ jobs:
         echo "=========="
         VERSION_BASE=1.0
         echo "VERSION_BASE:    ${VERSION_BASE}"
-        RUN_NUMBER={{ GITHUB_RUN_NUMBER }}
+        RUN_NUMBER=${GITHUB_RUN_NUMBER}
         echo "RUN_NUMBER:      ${RUN_NUMBER}"
         VERSION=${VERSION_BASE}.${RUN_NUMBER}
         echo "VERSION:         ${VERSION}"
