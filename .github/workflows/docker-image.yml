@@ -6,16 +6,6 @@ on:
 #   pull_request:
 #     branches: [ "main" ]
 
-    inputs:
-      rel_type:
-        type: choice
-        description: Select type of release
-        required: true
-        default: 'dev'
-        options:
-          - dev
-          - release
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -102,7 +92,7 @@ jobs:
         # asvsam_20210820/refs/heads/master/36d5c471c6933e2f66b6041e8bfe98027922366b
         GIT_REF_FULLTEXT=$(echo "${GIT_REPO}/${GIT_REF}/${GIT_COMMIT}")
         echo "GIT_REF_FULLTEXT: ${GIT_REF_FULLTEXT}"
-        echo "$(cd asvsam-installer; cat .git/config)"
+        #echo "$(cd asvsam-installer; cat .git/config)"
 
         echo "TIME:"
         echo "=========="
