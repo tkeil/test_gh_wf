@@ -126,7 +126,7 @@ jobs:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         RELEASE_TYPE: ${{ inputs.rel_type }}
 #      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" > ddd;cat ddd; ls -al ddd;git clone https://github.com/asvsam/asvsam-installer.git;ls -al; find asvsam-installer
-
+ 
   build:
     needs: checkout-test
     runs-on: self-hosted
